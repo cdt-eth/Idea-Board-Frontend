@@ -10,3 +10,30 @@
 .App-intro {
   font-size: large;
 }
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.title {
+  border: 1px solid black;
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  background: lightyellow;
+  float: left;
+  padding: 15px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.idea-title {
+  border-bottom: 1px solid black;
+  font-size: 13px;
+  padding-bottom: 5px;
+}
+
+.idea-body {
+  text-align: left;
+}
