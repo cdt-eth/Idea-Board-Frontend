@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import Idea from './Idea';
 
@@ -15,7 +15,6 @@ class IdeasContainer extends Component {
     axios
       .get('http://localhost:3001/api/v1/ideas.json')
       .then(response => {
-        console.log(response);
         this.setState({ ideas: response.data });
       })
       .catch(error => console.log(error));
@@ -23,11 +22,16 @@ class IdeasContainer extends Component {
 
   render() {
     return (
-      <div className="items">
-        {this.state.ideas.map(idea => {
-          return <Idea idea={idea} key={idea.id} />;
-        })}
-      </div>
+      <Fragment>
+        <div className="buttonDiv">
+          <button className="newIdeaButton">New Idea</button>
+        </div>
+        <div className="items">
+          {this.state.ideas.map(idea => {
+            return <Idea idea={idea} key={idea.id} />;
+          })}
+        </div>
+      </Fragment>
     );
   }
 }
