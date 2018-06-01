@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Idea = ({ idea }) => (
-  <div className="title" key={idea.id}>
-    <h4 className="idea-title"> {idea.title} </h4>
-    <p className="idea-body"> {idea.body} </p>
-  </div>
-);
+class Idea extends Component {
+  handleClick = () => {
+    this.props.onClick(this.props.idea.id);
+  };
+
+  render() {
+    return (
+      <div className="title">
+        <h4 onClick={this.handleClick} className="idea-title">
+          {this.props.idea.title}
+        </h4>
+        <p onClick={this.handleClick} className="idea-body">
+          {this.props.idea.body}
+        </p>
+      </div>
+    );
+  }
+}
+
 export default Idea;
