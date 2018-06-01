@@ -22,7 +22,7 @@ class IdeaForm extends Component {
     const idea = { title: this.state.title, body: this.state.body };
 
     axios
-      .put(`http://localhost:3001/api/v1/ideas/${this.props.idea.id}`, { idea: idea })
+      .put(`https://idea-board-backend.herokuapp.com/api/v1/ideas/${this.props.idea.id}`, { idea: idea })
       .then(response => {
         console.log(response);
         this.props.updateIdea(response.data);
