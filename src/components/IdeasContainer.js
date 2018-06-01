@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import Idea from './Idea';
 import IdeaForm from './IdeaForm';
+import Notification from './Notification';
 import update from 'immutability-helper';
 
 class IdeasContainer extends Component {
@@ -11,7 +12,8 @@ class IdeasContainer extends Component {
     this.state = {
       ideas: [],
       editingIdeaId: null,
-      notification: ''
+      notification: '',
+      transitionIn: false
     };
   }
 
@@ -39,11 +41,11 @@ class IdeasContainer extends Component {
     const ideaIndex = this.state.ideas.findIndex(x => x.id === idea.id);
 
     const ideas = update(this.state.ideas, { [ideaIndex]: { $set: idea } });
-    this.setState({ ideas: ideas, notification: 'All changes saved' });
+    this.setState({ ideas: ideas, notification: 'All changes saved', transitionIn: true });
   };
 
   resetNotification = () => {
-    this.setState({ notification: '' });
+    this.setState({ notification: '', transitionIn: false });
   };
 
   enableEditing = id => {
@@ -71,7 +73,7 @@ class IdeasContainer extends Component {
           <button className="newIdeaButton" onClick={this.addNewIdea}>
             New Idea
           </button>
-          <span className="notification">{this.state.notification}</span>
+          <Notification in={this.state.transitionIn} notification={this.state.notification} />
         </div>
         <div className="items">
           {this.state.ideas.map(idea => {
