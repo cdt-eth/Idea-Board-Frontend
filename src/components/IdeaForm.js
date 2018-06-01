@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class IdeaForm extends Component {
   constructor(props) {
@@ -16,10 +17,22 @@ class IdeaForm extends Component {
     });
   };
 
+  handleBlur = () => {
+    const idea = { title: this.state.title, body: this.state.body };
+
+    axios
+      .put(`http://localhost:3001/api/v1/ideas/${this.props.idea.id}`, { idea: idea })
+      .then(response => {
+        console.log(response);
+        this.props.updateIdea(response.data);
+      })
+      .catch(error => console.log(error));
+  };
+
   render() {
     return (
       <div className="title">
-        <form>
+        <form onBlur={this.handleBlur}>
           <input
             className="input"
             type="text"
